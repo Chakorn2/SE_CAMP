@@ -238,6 +238,9 @@
                                 </p>
                             </a>
                         </li>
+                        <a href="logout" class="btn btn-lg" style="background-color: rgb(179, 23, 23)" >
+                            <span class="glyphicon glyphicon-log-out" style="color: white"> Log out </span>
+                        </a>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
