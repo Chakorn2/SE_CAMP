@@ -1,109 +1,66 @@
-<!doctype html>
-<html>
+@extends('layouts.default')
 
+@section('title', 'Titles')
+
+@section('content')
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Javascript 101</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication Table Generator</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  #content {
+    text-align: center;
+    padding-top: 50px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 600px;
+  }
+  table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+</style>
 </head>
-
 <body>
-    <h1>Before</h1>
-    <h1 id="myh1">
-        <h1>Prepend</h1>Javascript<h1>Append</h1>
-    </h1>
-    <h1>After</h1>
-    <button onclick="alert('Hello World!')">Click Me!</button>
-    <input type="text" id="my_number" value="10">
-    <button onclick="myFunction()">submit number</button>
-    <br>
-    <button onclick="myFunction2()">submit my function2</button>
-    <br>
-    <table id="my_table">
-        <thead>
-            <tr>
-                <td>#</td>
-                <td>result</td>
-            </tr>
-        </thead>
-        <tbody id="my_tbody">
 
-        </tbody>
-    </table>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            console.log("Hello World - document.ready")
-            console.log($('#myh1').text())
-            console.log($('#my_number').val())
-            $('#myh1').text("Javascript 101")
-            $('#my_number').val(100)
-            // setInterval(() => {
-            //     $('#myh1').after(`<h1 class="my_gen_number">setInterval</h1>`)
-            // }, 2000);
-        });
+<div id="content">
+  <label for="num">Enter a number:</label>
+  <input type="number" id="num">
+  <button id="generateTable">Generate Table</button>
+  <div id="multiplicationTable"></div>
+</div>
 
-        function myFunction2() {
-            // $($('#my_table').children()[1]).html("<tr><td>1</td><td>test</td></tr>")
-            let my_number = parseInt($('#my_number').val())
-            let my_code_tr = ``
-            for (let i = 0; i < my_number; i++) {
-                my_code_tr += `<tr><td>${i}</td><td>test</td></tr>`
-            }
-            $('#my_tbody').html(my_code_tr)
+<script>
+  $(document).ready(function(){
+    $("#generateTable").click(function(){
+      var num = parseInt($("#num").val());
+      if(!isNaN(num)){
+        var tableHtml = "<table>";
+        for(var i = 1; i <= 12; i++){
+          tableHtml += "<tr><td>" + num + " × " + i + " = </td><td>" + (num * i) + "</td></tr>";
         }
+        tableHtml += "</table>";
+        $("#multiplicationTable").html(tableHtml);
+      } else {
+        alert("Please enter a valid number.");
+      }
+    });
+  });
+</script>
 
-        function myFunction() {
-            let my_number = parseInt($('#my_number').val())
-            for (let i = 0; i < my_number; i++) {
-                $('#myh1').after(`<h1 class="my_gen_number">${i}</h1>`)
-            }
-            console.log(document.getElementById('my_number').value);
-            console.log('Click submit number')
-
-            setTimeout(function() {
-                $('.my_gen_number').each(function(index, val) {
-                    $(val).remove();
-                    //val.remove()
-                })
-            }, 2000);
-
-        }
-        console.log("Hello World!")
-        let myval;
-        console.log(typeof myval);
-        myval = '10';
-        myval2 = '2';
-        console.log(myval, myval2);
-        myval3 = parseInt(myval) + myval2;
-        console.log(myval3)
-        myval3 = myval - myval2;
-        console.log(myval3)
-        myval3 = myval * myval2;
-        console.log(myval3)
-        myval3 = myval / myval2;
-        console.log(myval3)
-    </script>
-    <script>
-        let myval4 = [1, 2, 3, 4];
-
-        myval4[5] = 5;
-        myval4[6] = [6, 5, 4, 5]
-        console.log(myval4)
-
-        for (i = 0; i < myval4.length; i++) {
-            console.log("in for", myval4[i])
-        }
-        myval4.forEach(function(value, index) {
-            console.log("in forEach", value, index)
-        });
-
-        console.log(document.getElementById('myh1').innerHTML)
-        /*
-        // php
-        foreach($myval4 as $index => $value){
-
-        }
-        */
-    </script>
 </body>
-
 </html>
+
+
+@endsection
